@@ -35,5 +35,11 @@ def win_check(board : list,player_selected_index : tuple) :
                 break
     return win
 
-def game_controller(board : list) :
-    pass
+def game_controller(board : list,player : int,move_index : int,undo : bool = False) :
+    if can_move(board, move_index):
+        board[move_index - 1] = player
+        win = win_check(board,player)
+        if undo :
+            board[move_index - 1] = move_index
+            return True,win
+        return False,False
